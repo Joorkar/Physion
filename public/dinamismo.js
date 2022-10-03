@@ -1,4 +1,4 @@
-let references2 = [
+/* let references2 = [
   {
     "Name": "Nature (Journal)",
     "url": "https://www.nature.com/search?q=",
@@ -83,4 +83,4 @@ for (i = 0; i < references2.length; i++) {
   `
   referencesJSON.innerHTML += pLinks
 
-}
+} */
