@@ -1,3 +1,5 @@
+/*
+
 //Webscraping
 const puppeteer = require('puppeteer');
 const jsdom = require('jsdom');
@@ -36,3 +38,4 @@ function GetPageContent(thUrl,extart) {
   }
 
 module.exports.GetPageContent = GetPageContent;
+*/

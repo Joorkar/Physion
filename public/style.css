@@ -24,7 +24,7 @@ h4 {
 }
 
 #get-user-link {
-  border: 2px solid #393E46;
+  border: 2px solid #9BA4B4;
 }
 
 input {
@@ -85,8 +85,8 @@ a {
 .div-one p {
   margin: 0;
   padding: 10px;
-  background-color: #393E46;
-  color: #EEEEEE;
+  background-color: #9BA4B4;
+  color: #393E46;
   border-radius: 24px;
   cursor: pointer;
   transition: background-color 0.2s ease-out,
@@ -113,8 +113,8 @@ a {
   text-align: center;
   line-height: 30px;
   border-radius: 14px;
-  background-color: #393E46;
-  color: #EEEEEE;
+  background-color: #9BA4B4;
+  color: #393E46;
   cursor: pointer;
   transition: background-color 0.2s ease-out,
   color 0.2s ease-out;
@@ -124,6 +124,7 @@ a {
   color: #EEEEEE;
 }
 .div-two details summary:hover {
+  text-decoration: underline;
   transition: background-color 0.3s ease-in,
   color 0.3s ease-in;
 }
@@ -143,8 +144,8 @@ a {
   padding: 5px;
   text-align: center;
   border-radius: 14px;
-  background-color: #393E46;
-  color: #EEEEEE;
+  background-color: #9BA4B4;
+  color: #393E46;
   transition: background-color 0.2s ease-out,
   color 0.2s ease-out;
 }

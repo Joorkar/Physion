@@ -1,29 +1,4 @@
-
-
-function responsesF(e) {
-  e = JSON.parse(e)
-  console.log(e)
-  //document.getElementById("list-links").innerHTML = ""
-  e.forEach(element => {
-    document.getElementById("list-links").innerHTML += `<p>${element}</p>`
-  });
-}
-
-function HttpRequestApi(dato) {
-  theUrl = "http://localhost:3000/api";
-
-  var xmlhttp = new XMLHttpRequest();
-  xmlhttp.onreadystatechange = function () {
-    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-      responsesF(xmlhttp.responseText)
-    }
-  }
-  xmlhttp.open("POST", theUrl);
-  xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-  xmlhttp.send(JSON.stringify({ url: dato }));
-}
-
-let references = [
+var references = [
   {
     "Name": "Nature (Journal)",
     "url": "https://www.nature.com/search?q=",
@@ -96,49 +71,74 @@ let references = [
   }
 ]
 
-const listLinks = document.getElementById('list-links')
-const getLinkUser = document.getElementById('get-user-link').value;
-const seeInDisplay = document.fill.link.value
-const referencesJSON = document.getElementById('referencesJSON')
+var referencesResponse = []
 
-let pLinks
 
-console.log(getLinkUser);
-
-const links = [
-  'https://www.google.com',
-  'https://www.google.com',
-  'https://www.google.com',
-  'https://www.google.com',
-  'https://www.google.com',
-]
-
-// how to print array elements in javascript?
-/* for (let i = 0; i < links.length; i++) {
-  pLinks = `
-    <a href="${links[i]}">${links[i]}</a>
-  `
-  listLinks.innerHTML += pLinks
-} */
-
-for (i = 0; i < references.length; i++) {
-  pLinks = `
-    <a href=${references[i].url}>- ${references[i].Name}</a>
-  `
-  referencesJSON.innerHTML += pLinks
-
+// FUNCIONES 200
+function responsesF(e) {
+  e = JSON.parse(e)
+  console.log(e)
+  document.getElementById("list-links").innerHTML = ""
+  e.forEach(element => {
+    document.getElementById("list-links").innerHTML += `<p>${element}</p>`
+  });
+  optenerTitulo()
 }
 
-/* references.forEach((reference) => {
-  pLinks = `
-    <p>${reference}</p>
-  `
-  referencesJSON.innerHTML += pLinks
-}); */
+function extraerTitulo(e){
+  e = JSON.parse(e)
+  console.log(e)
+  optenerQueryForSite(e[0])
+}
+
+function agregarAListDeReferencias(e){
+  e = JSON.parse(e)
+  console.log(e)
+  referencesResponse.push(e)
+}
 
 
-/* `<details>
-  <summary>${}</summary>
-  <a href="${}">${}</a>
-</details>
-` */
+// FUNCION HTTP
+function HttpRequestApi(dato,selectorCSS,funcionrespuesta) {
+  theUrl = "http://localhost:3000/api";
+
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function () {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+      funcionrespuesta(xmlhttp.responseText)
+    }
+  }
+  xmlhttp.open("POST", theUrl);
+  xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  xmlhttp.send(JSON.stringify({ url: dato , selc : selectorCSS}));
+}
+
+
+
+// FUNCIONES REQUEST
+function optenerURL() {
+  Url = document.getElementById("textURL").value;
+  selector = "p"
+  HttpRequestApi(Url,selector,responsesF);
+}
+
+function optenerTitulo(){
+  Url = document.getElementById("textURL").value;
+  selector = "title"
+  HttpRequestApi(Url,selector,extraerTitulo);
+}
+
+//-------------------- Complemento
+function optenerReferenciasDeLink(u,s){
+  Url = u;
+  selector = s;
+  HttpRequestApi(Url,selector,agregarAListDeReferencias);
+}
+//--------------------
+
+
+function optenerQueryForSite(buscar){
+  references.forEach((element) => {
+    optenerReferenciasDeLink(element["url"]+buscar,element["punto"])
+   })
+}
