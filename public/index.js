@@ -85,35 +85,35 @@ function responsesF(e) {
   optenerTitulo()
 }
 
-function extraerTitulo(e){
+function extraerTitulo(e) {
   e = JSON.parse(e)
   console.log(e)
   optenerQueryForSite(e[0])
 }
 
-function agregarAListDeReferencias(e){
+function agregarAListDeReferencias(e) {
   e = JSON.parse(e)
   console.log(e)
 
-const referencesJSON = document.getElementById('referencesJSON')
+  const referencesJSON = document.getElementById('referencesJSON')
 
-let pLinks
+  let pLinks
 
-for (i = 0; i < e.length; i++) {
-  pLinks = `
+  for (i = 0; i < e.length; i++) {
+    pLinks = `
     <a href=${e[i]} style="background-color:black;color:white">- ${e[i]}</a>
   `
-  referencesJSON.innerHTML += pLinks
+    referencesJSON.innerHTML += pLinks
 
-}
+  }
 
   referencesResponse.push(e)
 }
 
 
 // FUNCION HTTP
-function HttpRequestApi(dato,selectorCSS,funcionrespuesta) {
-  theUrl = "http://localhost:3000/api";
+function HttpRequestApi(dato, selectorCSS, funcionrespuesta) {
+  theUrl = "https://joorkar.github.io/api";
 
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function () {
@@ -123,7 +123,7 @@ function HttpRequestApi(dato,selectorCSS,funcionrespuesta) {
   }
   xmlhttp.open("POST", theUrl);
   xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-  xmlhttp.send(JSON.stringify({ url: dato , selc : selectorCSS}));
+  xmlhttp.send(JSON.stringify({ url: dato, selc: selectorCSS }));
 }
 
 
@@ -132,25 +132,25 @@ function HttpRequestApi(dato,selectorCSS,funcionrespuesta) {
 function optenerURL() {
   Url = document.getElementById("textURL").value;
   selector = "p"
-  HttpRequestApi(Url,selector,responsesF);
+  HttpRequestApi(Url, selector, responsesF);
 }
 
-function optenerTitulo(){
+function optenerTitulo() {
   Url = document.getElementById("textURL").value;
   selector = "title"
-  HttpRequestApi(Url,selector,extraerTitulo);
+  HttpRequestApi(Url, selector, extraerTitulo);
 }
 
 //-------------------- Complemento
-function optenerReferenciasDeLink(u,s){
+function optenerReferenciasDeLink(u, s) {
   Url = u;
   selector = s;
-  HttpRequestApi(Url,selector,agregarAListDeReferencias);
+  HttpRequestApi(Url, selector, agregarAListDeReferencias);
 }
 //--------------------
 
-function optenerQueryForSite(buscar){
+function optenerQueryForSite(buscar) {
   references.forEach((element) => {
-    optenerReferenciasDeLink(element["url"]+buscar,element["punto"])
-   })
+    optenerReferenciasDeLink(element["url"] + buscar, element["punto"])
+  })
 }
