@@ -34,34 +34,47 @@ app.post('/api', async (req, res) => { //Optine informacion de las paginas
   const url = req.body.url;
   const selector = req.body.selc;
 
+try {
   downloadPage(url).then((body) => {
     const elements = forHtml(body,selector);
     res.send(elements);
   });
 
-  
+} catch (error) {
+  res.send([]);
+}
+
 })
 //----------------------------------------------------------------------------------------
 
 
 
 function downloadPage(url) {
-  return new Promise((resolve, reject) => {
-    request(url, (error, response, body) => {
-      if (error) reject(error);
-      if (response.statusCode != 200) {
-        reject('Invalid status code <' + response.statusCode + '>');
-      }
-      resolve(body);
+  try {
+    return new Promise((resolve, reject) => {
+      request(url, (error, response, body) => {
+        if (error) reject(error);
+        if (response.statusCode != 200) {
+          reject('Invalid status code <' + response.statusCode + '>');
+        }
+        resolve(body);
+      });
     });
-  });
+  } catch (error) {
+    return "";
+  }
+  
 }
 
 function forHtml(body,elemento) {
-  let elements = [];
+  try {
+    let elements = [];
   const { window: { document } } = new jsdom.JSDOM(body);
   document.querySelectorAll(elemento).forEach(element => elements.push(element.textContent));
   return elements;
+  } catch (error) {
+    return [];
+  }
 }
 
 

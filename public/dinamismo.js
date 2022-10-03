@@ -1,4 +1,4 @@
-var references = [
+let references2 = [
   {
     "Name": "Nature (Journal)",
     "url": "https://www.nature.com/search?q=",
@@ -71,86 +71,16 @@ var references = [
   }
 ]
 
-var referencesResponse = []
-
-
-// FUNCIONES 200
-function responsesF(e) {
-  e = JSON.parse(e)
-  console.log(e)
-  document.getElementById("list-links").innerHTML = ""
-  e.forEach(element => {
-    document.getElementById("list-links").innerHTML += `<p>${element}</p>`
-  });
-  optenerTitulo()
-}
-
-function extraerTitulo(e){
-  e = JSON.parse(e)
-  console.log(e)
-  optenerQueryForSite(e[0])
-}
-
-function agregarAListDeReferencias(e){
-  e = JSON.parse(e)
-  console.log(e)
-
+const listLinks = document.getElementById('list-links')
+const seeInDisplay = document.fill.link.value
 const referencesJSON = document.getElementById('referencesJSON')
 
 let pLinks
 
-for (i = 0; i < e.length; i++) {
+for (i = 0; i < references2.length; i++) {
   pLinks = `
-    <a href=${e[i]} style="background-color:black;color:white">- ${e[i]}</a>
+    <a href=${references2[i].url}>- ${references2[i].Name}</a>
   `
   referencesJSON.innerHTML += pLinks
 
-}
-
-  referencesResponse.push(e)
-}
-
-
-// FUNCION HTTP
-function HttpRequestApi(dato,selectorCSS,funcionrespuesta) {
-  theUrl = "http://localhost:3000/api";
-
-  var xmlhttp = new XMLHttpRequest();
-  xmlhttp.onreadystatechange = function () {
-    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-      funcionrespuesta(xmlhttp.responseText)
-    }
-  }
-  xmlhttp.open("POST", theUrl);
-  xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-  xmlhttp.send(JSON.stringify({ url: dato , selc : selectorCSS}));
-}
-
-
-
-// FUNCIONES REQUEST
-function optenerURL() {
-  Url = document.getElementById("textURL").value;
-  selector = "p"
-  HttpRequestApi(Url,selector,responsesF);
-}
-
-function optenerTitulo(){
-  Url = document.getElementById("textURL").value;
-  selector = "title"
-  HttpRequestApi(Url,selector,extraerTitulo);
-}
-
-//-------------------- Complemento
-function optenerReferenciasDeLink(u,s){
-  Url = u;
-  selector = s;
-  HttpRequestApi(Url,selector,agregarAListDeReferencias);
-}
-//--------------------
-
-function optenerQueryForSite(buscar){
-  references.forEach((element) => {
-    optenerReferenciasDeLink(element["url"]+buscar,element["punto"])
-   })
 }
