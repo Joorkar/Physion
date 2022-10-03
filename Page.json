@@ -1,0 +1,28 @@
+[
+    {
+        "Name": "Nature (Journal)",
+        "url": "https://www.nature.com/search?q=",
+        "punto": "a.c-card__link"
+    },
+    {
+        "Name": "Arxiv (Cornell University Repository)",
+        "url": "https://www.cornell.edu/search/?q=",
+        "punto":"a.gs-title"
+    },
+    {
+        "Name": "",
+        "url": "",
+        "punto":""
+    },
+    {
+        "Name": "",
+        "url": "",
+        "punto":""
+    },
+    {
+        "Name": "",
+        "url": "",
+        "punto":""
+    }
+
+]

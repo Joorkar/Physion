@@ -1,0 +1,19 @@
+{
+  "name": "physhion",
+  "version": "1.0.0",
+  "description": "Physhion",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon index.js"
+  },
+  "author": "Physhion",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "express": "^4.18.1",
+    "jsdom": "^20.0.0",
+    "nodemon": "^2.0.20",
+    "puppeteer": "^18.0.5",
+    "request": "^2.88.2"
+  }
+}
